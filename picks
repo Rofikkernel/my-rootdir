@@ -71,7 +71,14 @@ repopick -p 433187 #latest lAdd ability to enable scudo-free 32-bit libc variant
 # external/avb
 #repopick -p 433319 #merge avbtool: Add retry to generate_fec_data()
 
+# device/google/contexthub
+repopick 433315 #latest  contexthub: sensorhal: allow building it again with Android.bp
 
+# device/generic/goldfish
+repopickchain 435541 #latest goldfish: Remove NavigationBarMode2ButtonOverlay
+
+# device/google/atv
+repopickchain 433314 # products: Make generic x86_64 TV target inherit 64bit_only
 
 # external/cronet
 repopick 433320 # cronet: Fix build with custom out directory
@@ -136,6 +143,10 @@ repopick -p 433906 #latest interfaces: fix disable_configstore
 # hardware/libhardware
 repopick -p 433441 #latest libhardware: Add new display types.
 
+# hardware/lineage/interfaces
+repopickchain 435570 # fastcharge: Sunset HIDL
+
+
 # hardware/qcom/wlan
 #repopick -p 437160 #merge caf Convert lib_driver_cmd_qcwcn for legacy to soong
 
@@ -147,6 +158,12 @@ repopick -p 433460 #latest Lower q/android-4.9 requirements
 
 # packages/apps/Camera2
 #repopick 433461 #abandone Override Aperture app
+
+# packages/apps/Car/Settings
+repopickchain 433464 #latest VolumeSettingsPreferenceController: Fix NPE when changing volumes
+
+# packages/apps/Car/SystemUI
+repopick 433465 #latest CarSystemUI: Fixes after QPR2
 
 # packages/apps/DocumentsUI
 repopick -p 433474 #latest DocumentsUI: add icons for shortcuts
@@ -165,6 +182,12 @@ repopick -p 433482 #latest Style search bar to match new Settings UI
 
 # packages/apps/ThemePicker
 repopick -p 437122 # lates ThemePicker: default to TONAL_SPOT for invalid Styles
+
+# packages/apps/TvSettings
+repopickchain 437349 #latest TvSettings: [TvSettings] fix PendingIntent conflict in RowBuilder actions
+
+# packages/apps/TvSystemUI
+repopick 433753 # Implement USB debugging dialog
 
 # packages/apps/WallpaperPicker2
 #repopick -p 433497 #merge WallpaperPicker2: Remove unnecessary top padding in Change wallpaper button
@@ -240,6 +263,10 @@ repopick -p 433625 #latest update_engine: Add static ota_extractor target
 
 # system/vold
 repopick -p 433641 #latest vold: Add support for ISO9660/UDF CD-ROM
+
+# vendor/qcom/opensource/audio-hal/st-hal-ar
+#repopickchain 437007 #hold until needed  st-hal-ar: Add dependency on libarpal_headers
+
 
 repopick 434168 #latest lineage: Enable Material Design 3 Expressive
 
