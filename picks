@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ANDROID_BUILD_TOP="$(dirname $(realpath "$0"))"
+[[ "${ANDROID_BUILD_TOP##*/}" == "lineageos-rootdir" ]] && ANDROID_BUILD_TOP="$(dirname "$ANDROID_BUILD_TOP")"
 CHECK="$(echo $1 | grep -q check && echo 1)"
-GERRIT_USERNAME="$(git config review.review.lineageos.org.username)"
+GERRIT_USERNAME="rofikkernel"
 
 function repopick() {
     if [[ "$CHECK" = "1" ]]; then
@@ -36,215 +37,231 @@ function rc() {
 # repopick ${changes[@]}
 #
 # # repo/2
-# repopickchain 2137 # hello (chain)
+# repopick -p 2137 # hello (chain)
 #
 # # repo/3
 # repopick 2137 # hello
 #
 
 # build/make
-# repopick -f 332045 # Don't enforce vintf kernel requirements when building without LTO
+repopick 433127 # -latest
 
-# android
-repopickchain 436442 # lineage: Temporarily track lineage-22.2 for certain repos
+#android
+repopick -p 436442 # -latest
 
 # bionic
-repopickchain 433204 # Add ability to build scudo-free 32-bit libc variant.
+repopick -p 433204 # Add ability to build scudo-free 32-bit libc variant.
 
 # bootable/deprecated-ota
-repopickchain 433207 # updater: Support loading dynamic partition metadata from OTA
+repopick -p 433207 # updater: Support loading dynamic partition metadata from OTA
 
 # bootable/recovery
-repopickchain 433302 # minui: events: Add support to exclude blacklisted input devices
+repopick -p 437117 # minui: latest
 
 # build/make
-repopickchain 433127 # soong: Add ability to build scudo-free 32-bit libc variant.
+repopick -p 433127 #latest
 
-# build/soong
-repopickchain 433187 # Add ability to enable scudo-free 32-bit libc variant.
+# build/soong 
+#repopick -p 433201 #Support prebuilt_kernel_headers
+repopick -p 433187 #latest lAdd ability to enable scudo-free 32-bit libc variant.
 
-# device/generic/goldfish
-repopickchain 435541 # goldfish: Remove NavigationBarMode2ButtonOverlay
+# external/arm-trusted-firmware
+#repopick -p 433317 #merge Partial Revert "Tegra: memctrl: cleanup streamid override registers"
 
-# device/google/atv
-repopickchain 433314 # products: Make generic x86_64 TV target inherit 64bit_only
+# external/avb
+#repopick -p 433319 #merge avbtool: Add retry to generate_fec_data()
 
-# device/google/contexthub
-repopick 433315 # contexthub: sensorhal: allow building it again with Android.bp
 
-# device/oneplus/sm8150-common
-changes=(
-    `rc 438974` # sm8150-common: Enable UFFD GC
-    437059 # sm8150-common: Update WFD system blobs from dada OS2.0.217.0.WOCMIXM
-)
-repopick ${changes[@]}
-
-# device/qcom/sepolicy
-repopickchain 436131 # sepolicy: Added attributes for Aware QSEC services.
-
-# device/qcom/sepolicy_vndr/sm8650
-repopickchain 437777 # sepolicy_vndr: Allow USB HAL to read display brightness
-
-# device/qcom/sepolicy_vndr/sm8750
-repopickchain 437756 # sepolicy: Remove sysfs_udc label
-
-# external/e2fsprogs
-repopickchain 433337 # e2fsck: Loosen fscrypt_policy struct size check
 
 # external/cronet
 repopick 433320 # cronet: Fix build with custom out directory
 
+# external/dtc
+#repopick -p 433334 #merge Add build support for more host utils
+
+# external/e2fsprogs
+repopick -p 433337 #latest e2fsck: Loosen fscrypt_policy struct size check
+
 # external/gptfdisk
-repopickchain 433344 # gptfdisk: Make libgptf available to product/vendor
+repopick -p 433344 # latest gptfdisk: Make libgptf available to product/vendor
+
+# external/mksh
+#repopick -p 433347 # merged mksh: Set TERM to xterm-256color
+
+# external/nano
+#repopick -p 435356 #merge nano: Regenerate config.h
 
 # external/setupcompat
-repopickchain 433354 # Change some more defaults
+repopick -p 433354 # latest Change some more defaults
+
+# external/tinycompress
+#repopick -p 433356 #merged tinycompress: Add conditional compilation check for compress param
+
+# external/wpa_supplicant_8
+#repopick 433358 #merge wpa_supplicant: add support for bcmdhd SAE authentication offload
+
+# external/zstd
+#repopick -p 433360 #merge zstd: Android.bp: Allow rsync to add zstd compression support
 
 # frameworks/av
-repopickchain 433713 # codec2: Extend the queue empty work hack to MTK decoders too
+repopick -p 437109 # latest
 
 # frameworks/base
-repopickchain 434605 # fixup! Firewall: Transport-based toggle support (1/3)
+repopick -p 437656 # latest
 
 # frameworks/native
-repopickchain 433383 # Do not return glGetString error on desktop GL context
+repopick -p 433383 # latest
 
+<<<<<<< HEAD
+=======
+# frameworks/opt/calendar
+#repopick 433385 #abandoned fix invalid time being set when `Time.set(Time)` is being called on itself
+
+# frameworks/opt/colorpicker
+#repopick 433386 #abandon Migrate to androidx
+
+>>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 # frameworks/opt/telephony
-repopickchain 433395 # telephony: Make "Do not ask again" functional
+repopick -p 433395 #latest telephony: Make "Do not ask again" functional
 
+<<<<<<< HEAD
+=======
+# frameworks/opt/timezonepicker
+#repopick -p 433398 #abandoned Migrate to androidx fragment library
+
+>>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 # hardware/broadcom/libbt
-repopickchain 433406 # Improve UART baud rate handling
+repopick -p 433406 #latest Improve UART baud rate handling
 
 # hardware/google/pixel
-repopickchain 433415 # pixel: Disable lineage health HAL
+repopick -p 433415 #latest pixel: Disable lineage health HAL
 
 # hardware/interfaces
-repopickchain 433906 # interfaces: fix disable_configstore
+repopick -p 433906 #latest interfaces: fix disable_configstore
 
 # hardware/libhardware
-repopickchain 433441 # libhardware: Add new display types.
+repopick -p 433441 #latest libhardware: Add new display types.
 
-# hardware/lineage/interfaces
-repopickchain 435216 # power-libperfmgr: Use HintManagerT instead of HintManager.
+# hardware/qcom/wlan
+#repopick -p 437160 #merge caf Convert lib_driver_cmd_qcwcn for legacy to soong
 
-# hardware/qcom-caf/sm8650/audio/agm
-repopickchain 437634 # agm_ipc_service: Include libagm_headers
-
-# hardware/qcom-caf/sm8650/audio/pal
-repopickchain 437326 # pal: fix redefinition of MS_PER_SEC / US_PER_SEC
-
-# hardware/qcom-caf/sm8650/audio/primary-hal
-repopickchain 437496 # libbaterylistener: Remove unused HIDL health dependencies
-
-# hardware/qcom-caf/sm8650/dataipa
-repopickchain 437521 # dataipa: Disable all the debugging
-
-# hardware/qcom-caf/sm8650/data-ipa-cfg-mgr
-repopickchain 437517 # ipacm: Address ipacm start failure
-
-# hardware/qcom-caf/sm8650/display
-repopickchain 437787 # gralloc: avoid calling property_get() on every buffer allocation
-
-# hardware/qcom-caf/sm8650/audio/agm
-repopickchain 437334 # agm: disable mem logger support
-
-# hardware/qcom-caf/sm8750/audio/pal
-repopickchain 437868 # vui_interface: Address more compilation errors
-
-# hardware/qcom-caf/sm8750/audio/primary-hal
-repopickchain 437495 # libbaterylistener: Remove unused HIDL health dependencies
-
-# hardware/qcom-caf/sm8750/dataipa
-repopickchain 437553 # dataipa: Disable all the debugging
-
-# hardware/qcom-caf/sm8750/display/hal
-repopickchain 437788 # gralloc: avoid calling property_get() on every buffer allocation
+# hardware/st/nfc
+#repopick -p 433452 #merge Add support for text FW configs
 
 # kernel/configs
-repopickchain 433460 # Lower q/android-4.9 requirements
+repopick -p 433460 #latest Lower q/android-4.9 requirements
 
-# kernek/oneplus/sm8150
-repopick -p 437057 # Merge commit 'refs/changes/33/436733/9' of https://github.com/LineageOS/android_kernel_qcom_sm8150 into HEAD
-
-# packages/apps/Car/Settings
-repopickchain 433464 # VolumeSettingsPreferenceController: Fix NPE when changing volumes
-
-# packages/apps/Car/SystemUI
-repopick 433465 # CarSystemUI: Fixes after QPR2
+# packages/apps/Camera2
+#repopick 433461 #abandone Override Aperture app
 
 # packages/apps/DocumentsUI
-repopickchain 433474 # DocumentsUI: add icons for shortcuts
+repopick -p 433474 #latest DocumentsUI: add icons for shortcuts
 
 # packages/apps/EmergencyInfo
-repopickchain 433477 # EmergencyInfo: Apply insets
+repopick -p 433477 #lates EmergencyInfo: Apply insets
 
 # packages/apps/Launcher3
-repopickchain 435246 # Launcher3: Make taskbar start aligned in all grid sizes
+repopick -p 435246 # lates Launcher3: Make taskbar start aligned in all grid sizes
 
 # packages/apps/Settings
-repopickchain 435672 # [DNM] Revert "Settings: Add FastCharge preference into Battery settings"
+repopick -p 437655 #latest fixup! Fix background data clobbering other policies
 
 # packages/apps/SettingsIntelligence
-repopickchain 433482 # Style search bar to match new Settings UI
+repopick -p 433482 #latest Style search bar to match new Settings UI
 
 # packages/apps/ThemePicker
-repopickchain 435243 # ThemePicker: Fix hardcoded launcher package name
+repopick -p 437122 # lates ThemePicker: default to TONAL_SPOT for invalid Styles
 
-# packages/apps/TvSettings
-repopickchain 433752 # TvSettings: Fix energy optimization setting
-
-# packages/apps/TvSystemUI
-repopick 433753 # Implement USB debugging dialog
+# packages/apps/WallpaperPicker2
+#repopick -p 433497 #merge WallpaperPicker2: Remove unnecessary top padding in Change wallpaper button
 
 # packages/modules/Bluetooth
-repopickchain 433508 # BondStateMachine: Check name for validity before access
+repopick -p 433508 #latet BondStateMachine: Check name for validity before access
 
 # packages/modules/Connectivity
-repopickchain 433520 # fixup! Firewall: Transport-based toggle support (3/3)
+repopick -p 436692 #latest bpf: Allow overriding kernel version
 
 # packages/modules/Permission
-repopickchain 433523 # permissions: check verity before using
+repopick -p 434121 # lates SafetyCenter: Declare Advanced Protection related safety sources
+
+# packages/modules/Wifi
+#repopick 433524 # merge Wifi: Ingore miracast scan from connectivity manager
+
+# packages/modules/adb
+#repopick -p 433502 #merge Add ADB root service changes
+
+# packages/modules/common
+#repopick 433509 #merge Make adbroot_aidl_interface-ndk available for adbd
+
+# packages/providers/DownloadProvider
+#repopick -p 433527 #merge DownloadProvider: Add support for manual pause/resume
+
+# packages/providers/TelephonyProvider
+#repopick -p 433532 #abandon TelephonyProvider: add upgrade support from lineage-17.1
 
 # packages/services/Car
-repopickchain 433542 # car_product: Guard APN copy with LINEAGE_BUILD
+repopick -p 433542 #latest car_product: Guard APN copy with LINEAGE_BUILD
 
 # packages/services/DeviceAsWebcam
-repopickchain 433544 # DeviceAsWebcam: jni: Make dwMaxPayloadTransferSize adjustable via property
+repopick -p 433544 #latest DeviceAsWebcam: jni: Make dwMaxPayloadTransferSize adjustable via property
 
 # system/bpf
-repopickchain 433560 # bpfloader: prog names are only valid on 4.15+
+repopick -p 433560 #latest bpfloader: prog names are only valid on 4.15+
 
+<<<<<<< HEAD
+=======
+# system/chre
+#repopick 433561 #merge Restore MSM CHRE daemon support
+
+>>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 # system/core
-repopickchain 436680 # Revert "Remove space check from overlayfs test"
+repopick -p 437212 #latest init: add a hook before parsing system properties
+
+# system/extras
+repopick -p 433593 # bootsignature: includes dt image size for signed boot image
 
 # system/keymaster
-repopick 433595 # Restore ImportKeyRequest::SetKeyMaterial
+repopick 433595 #lates Restore ImportKeyRequest::SetKeyMaterial
 
 # system/libhidl
-repopick 433596 # libhidlmemory: mark as recovery_available
+repopick 433596 #latest libhidlmemory: mark as recovery_available
+
+# system/libziparchive
+#repopick 433598 #merge ziptool: restore unzip for recovery
 
 # system/logging
-repopickchain 433600 # liblog: Always report as debuggable when building userdebug/eng
+repopick -p 433600 #lates liblog: Always report as debuggable when building userdebug/eng
 
 # system/netd
-repopickchain 433604 # VPN-covered DNS traffic may not fall through
+repopick -p 433604 #latest VPN-covered DNS traffic may not fall through
 
 # system/security
-repopick 433605 # Handle key parameter conversion for FBE_ICE tag
+repopick 433605 #latest  Handle key parameter conversion for FBE_ICE tag
 
 # system/sepolicy
-repopickchain 434112 # Allow vsock_socket in recovery
+repopick -p 434112 # latest Allow vsock_socket in recovery
 
 # system/tools/mkbootimg
-repopick 433617 # mkbootimg: add support for --dt
+repopick 433617 #latest mkbootimg: add support for --dt
 
 # system/update_engine
-repopickchain 433625 # update_engine: Add static ota_extractor target
+repopick -p 433625 #latest update_engine: Add static ota_extractor target
 
 # system/vold
-repopickchain 433641 # vold: Add support for ISO9660/UDF CD-ROM
+repopick -p 433641 #latest vold: Add support for ISO9660/UDF CD-ROM
 
-# vendor/qcom/opensource/audio-hal/st-hal-ar
-repopickchain 437007 # st-hal-ar: Add dependency on libarpal_headers
+repopick 434168 #latest lineage: Enable Material Design 3 Expressive
 
+<<<<<<< HEAD
+=======
+repopick -p 436866 #last compat: Provide libui-v34
+
+#force qcom-caf bootctrl
+repopick -p -f 436200
+
+#qcom-caf common
+repopick -p 437335
+
+#modified by Rofikkernel
+>>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 wait
