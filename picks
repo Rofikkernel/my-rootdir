@@ -112,24 +112,18 @@ repopick -p 437656 # latest
 # frameworks/native
 repopick -p 433383 # latest
 
-<<<<<<< HEAD
-=======
 # frameworks/opt/calendar
 #repopick 433385 #abandoned fix invalid time being set when `Time.set(Time)` is being called on itself
 
 # frameworks/opt/colorpicker
 #repopick 433386 #abandon Migrate to androidx
 
->>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 # frameworks/opt/telephony
 repopick -p 433395 #latest telephony: Make "Do not ask again" functional
 
-<<<<<<< HEAD
-=======
 # frameworks/opt/timezonepicker
 #repopick -p 433398 #abandoned Migrate to androidx fragment library
 
->>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 # hardware/broadcom/libbt
 repopick -p 433406 #latest Improve UART baud rate handling
 
@@ -208,12 +202,9 @@ repopick -p 433544 #latest DeviceAsWebcam: jni: Make dwMaxPayloadTransferSize ad
 # system/bpf
 repopick -p 433560 #latest bpfloader: prog names are only valid on 4.15+
 
-<<<<<<< HEAD
-=======
 # system/chre
 #repopick 433561 #merge Restore MSM CHRE daemon support
 
->>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 # system/core
 repopick -p 437212 #latest init: add a hook before parsing system properties
 
@@ -252,8 +243,6 @@ repopick -p 433641 #latest vold: Add support for ISO9660/UDF CD-ROM
 
 repopick 434168 #latest lineage: Enable Material Design 3 Expressive
 
-<<<<<<< HEAD
-=======
 repopick -p 436866 #last compat: Provide libui-v34
 
 #force qcom-caf bootctrl
@@ -263,5 +252,4 @@ repopick -p -f 436200
 repopick -p 437335
 
 #modified by Rofikkernel
->>>>>>> 4d325de (rofikkernel checked at 22 july 2025)
 wait
