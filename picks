@@ -280,8 +280,8 @@ repopick -p -f 436200
 #qcom-caf common
 repopick -p 437335
 
-#sepolicy debug (optiona)
-repopick 436465 #latest sepolicy: sepolicy: Make secilc more verbose
+#system sepolicy debug (optiona)
+repopick -p 436465 #latest sepolicy: sepolicy: Make secilc more verbose
 
 #modified by Rofikkernel
 wait
