@@ -146,6 +146,8 @@ repopick -p 433441 #latest libhardware: Add new display types.
 # hardware/lineage/interfaces
 repopick -p 435570 # fastcharge: Sunset HIDL
 
+repopick -p 435571 #sunset common: Remove fastcharge HIDL rules sunset
+
 
 # hardware/qcom/wlan
 #repopick -p 437160 #merge caf Convert lib_driver_cmd_qcwcn for legacy to soong
@@ -277,6 +279,9 @@ repopick -p -f 436200
 
 #qcom-caf common
 repopick -p 437335
+
+#sepolicy debug (optiona)
+repopick 436465 #latest sepolicy: sepolicy: Make secilc more verbose
 
 #modified by Rofikkernel
 wait
