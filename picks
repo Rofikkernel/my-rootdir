@@ -144,9 +144,10 @@ repopick -p 433906 #latest interfaces: fix disable_configstore
 repopick -p 433441 #latest libhardware: Add new display types.
 
 # hardware/lineage/interfaces
-repopick -p 435570 # fastcharge: Sunset HIDL
+repopick -p 435216 # power-libperfmgr: Use HintManagerT instead of HintManager.
 
-repopick -p 435571 #sunset common: Remove fastcharge HIDL rules sunset
+#lineage sepolicy
+repopick -p 363368 #qcom: Remove sdm845 from the m4defs exclusion
 
 
 # hardware/qcom/wlan
